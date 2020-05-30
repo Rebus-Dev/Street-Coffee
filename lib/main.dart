@@ -1,20 +1,17 @@
+import 'package:StreetCoffee/screens/LoginScreens/LoginScreen.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(StreetCoffee());
 
-class MyApp extends StatelessWidget {
+class StreetCoffee extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Welcome to Street Coffee',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Street Coffee'),
-        ),
-        body: Center(
-          child: Text('Hello Street Coffee'),
-        ),
-      ),
+      title: "Street Coffee",
+      debugShowCheckedModeBanner: true,
+      home: LoginScreen(),
     );
   }
+  
 }
