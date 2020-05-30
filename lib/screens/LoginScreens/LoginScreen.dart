@@ -1,6 +1,10 @@
-import 'package:StreetCoffee/screens/HomeScreens/HomeScreen.dart';
 import 'package:flutter/material.dart';
+
 import 'package:StreetCoffee/utilities/Constants.dart';
+import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
+
+import 'package:StreetCoffee/screens/HomeScreens/HomeScreen.dart';
+import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -70,50 +74,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 15.0),
-            _buildFieldsData(),
+            buildDataField(),
+
             SizedBox(height: 20.0),
             _buildRememberSignIn(),
+
             SizedBox(height: 20.0),
+
             _buildLoginButton(context),
             _buildSignInWithText(),
-            _buildSocialBtnRow()
+            _buildSocialBtnRow(),
+            _buildSignupButton()
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFieldsData() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Мобільний телефон",
-          style: kLabelStyle
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-              hintText: "Введіть будь ласка моб. тел.",
-              hintStyle: kHintTextStyle
-            ),
-          ),
-        )
-      ],
-    );
-  }
+
 
   Widget _buildRememberSignIn() {
     return Container(
@@ -143,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildLoginButton(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
@@ -180,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
             fontWeight: FontWeight.w400,
           ),
         ),
-        SizedBox(height: 20.0),
+        SizedBox(height: 10.0),
         Text(
           'Увійти за допомогою',
           style: TextStyle(
@@ -221,7 +199,7 @@ Widget _buildSocialBtn(Function onTap, AssetImage logo) {
 
   Widget _buildSocialBtnRow() {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
+      padding: EdgeInsets.symmetric(vertical: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -238,6 +216,39 @@ Widget _buildSocialBtn(Function onTap, AssetImage logo) {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSignupButton() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegistrationScreen())
+        );
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'У вас немає облікового запису? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Зареєструйтесь',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
