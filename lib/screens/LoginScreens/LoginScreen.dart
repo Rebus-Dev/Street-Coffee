@@ -1,8 +1,8 @@
+import 'package:StreetCoffee/screens/HomeScreens/HomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:StreetCoffee/utilities/Constants.dart';
 
 class LoginScreen extends StatefulWidget {
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 
@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20.0),
             _buildRememberSignIn(),
             SizedBox(height: 20.0),
-            _buildLoginButton(),
+            _buildLoginButton(context),
             _buildSignInWithText(),
             _buildSocialBtnRow()
           ],
@@ -141,13 +141,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SecondRoute())
+          );
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
