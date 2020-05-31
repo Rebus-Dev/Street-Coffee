@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 
 import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
+import 'package:StreetCoffee/utilities/Widget/Button.dart';
  
 class RegistrationScreen extends StatelessWidget {
   
@@ -55,9 +56,65 @@ class RegistrationScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(height: 30.0),
+            DataField(),
+
+            SizedBox(height: 30.0),
+            _buildPrevievText(),
+            
+            SizedBox(height: 40.0),
+            _buildRegisterButton(),
+            
+            SignInWithText('Зареєструватися за допомогою'),
             SizedBox(height: 20.0),
-            buildDataField()
+            SocialBtnRow(),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPrevievText() {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            "Нікому не повідомляйте код який надійде вам в смс, " +
+            "даний код буде використано для реєстрації і в подальшому " +
+            "він стане неактивним",
+            style: TextStyle(
+              color: Colors.white54,
+              fontFamily: "OpenSans",
+              fontSize: 12.0,
+            ),
+          ),
+        ],
+      )
+    );
+  }
+
+  Widget _buildRegisterButton() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 15.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: () {
+          // Registration
+        },
+        padding: EdgeInsets.all(15.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: Colors.white,
+        child: Text(
+          'Зареєструватися',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+          )
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:StreetCoffee/utilities/Constants.dart';
 import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
+import 'package:StreetCoffee/utilities/Widget/Button.dart';
 
 import 'package:StreetCoffee/screens/HomeScreens/HomeScreen.dart';
 import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
@@ -74,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 15.0),
-            buildDataField(),
+            DataField(),
 
             SizedBox(height: 20.0),
             _buildRememberSignIn(),
@@ -82,8 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 20.0),
 
             _buildLoginButton(context),
-            _buildSignInWithText(),
-            _buildSocialBtnRow(),
+            SignInWithText('Увійти за допомогою'),
+            SocialBtnRow(),
             _buildSignupButton()
           ],
         ),
@@ -144,78 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
             fontFamily: 'OpenSans',
           )
         ),
-      ),
-    );
-  }
-
-  Widget _buildSignInWithText() {
-    return Column(
-      children: <Widget>[
-        Text(
-          'Або',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 10.0),
-        Text(
-          'Увійти за допомогою',
-          style: TextStyle(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ],
-    );
-  }
-
-Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 50.0,
-        width: 50.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(
-            image: logo,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            AssetImage(
-              "assets/images/facebook.jpg",
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            AssetImage(
-              "assets/images/google.jpg",
-            ),
-          ),
-        ],
       ),
     );
   }

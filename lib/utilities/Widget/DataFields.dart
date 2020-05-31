@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:StreetCoffee/utilities/Constants.dart';
 
-Widget buildDataField() {
+Widget DataField() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
