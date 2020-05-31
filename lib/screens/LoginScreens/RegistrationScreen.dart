@@ -12,7 +12,7 @@ class RegistrationScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF04B47C),
         title: Text(
-          "Рестрація",
+          "Реєстрація",
         ),
       ),
       body: Stack(
