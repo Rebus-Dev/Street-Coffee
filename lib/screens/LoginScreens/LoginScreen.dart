@@ -4,7 +4,7 @@ import 'package:StreetCoffee/utilities/Constants.dart';
 import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
 import 'package:StreetCoffee/utilities/Widget/Button.dart';
 
-import 'package:StreetCoffee/screens/HomeScreens/HomeScreen.dart';
+import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecondRoute())
+            MaterialPageRoute(builder: (context) => MenuDashboardLayout())
           );
         },
         padding: EdgeInsets.all(15.0),
