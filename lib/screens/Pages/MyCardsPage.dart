@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
+import 'package:StreetCoffee/utilities/Widget/Cards.dart';
 
 class MyCardsPage extends StatelessWidget with NavigationStates {
   final Function onMenuTap;
@@ -34,50 +35,19 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
                 ],
               ),
               SizedBox(height: 50),
-              Container(
-                height: 200,
-                child: PageView(
-                  controller: PageController(viewportFraction: 0.8),
-                  scrollDirection: Axis.horizontal,
-                  pageSnapping: true,
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      color: Colors.redAccent,
-                      width: 100,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      color: Colors.blueAccent,
-                      width: 100,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
-                      color: Colors.greenAccent,
-                      width: 100,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
               Text(
-                "Transactions",
+                "Shares",
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
-              ListView.separated(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text("Macbook"),
-                    subtitle: Text("Apple"),
-                    trailing: Text("-2900"),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return Divider(height: 16);
-                },
-                itemCount: 10,
+              SizedBox(height: 20),
+              CardsDashboard(),
+              SizedBox(height: 20),
+              Text(
+                "News",
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
+              SizedBox(height: 20),
+              CardsDashboard(),
               SizedBox(height: 20),
             ],
           ),
