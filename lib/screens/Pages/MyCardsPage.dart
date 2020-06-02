@@ -12,7 +12,7 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40)),
-        color: Colors.grey,
+        color: Color(0xFF04B47C),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,

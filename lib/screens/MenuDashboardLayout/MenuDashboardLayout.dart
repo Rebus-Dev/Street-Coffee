@@ -8,7 +8,7 @@ import 'package:StreetCoffee/screens/Pages/UtilityBillsPage.dart';
 
 import 'menu.dart';
 
-final Color backgroundColor = Color(0xFF4A4A58);
+final Color backgroundColor = Color(0xFF038C61);
 
 class MenuDashboardLayout extends StatefulWidget {
   @override
