@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:StreetCoffee/screens/Pages/MessagesPage.dart';
+import 'package:StreetCoffee/screens/Pages/MenuPage.dart';
 import 'package:StreetCoffee/screens/Pages/MyCardsPage.dart';
-import 'package:StreetCoffee/screens/Pages/UtilityBillsPage.dart';
+import 'package:StreetCoffee/screens/Pages/CardBillsPage.dart';
 
 enum NavigationEvents {
   DashboardClickedEvent,

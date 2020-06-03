@@ -31,7 +31,7 @@ class Menu extends StatelessWidget {
                     onMenuItemClicked();
                   },
                   child: Text(
-                    "Dashboard",
+                    "Головна",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -46,7 +46,7 @@ class Menu extends StatelessWidget {
                     onMenuItemClicked();
                   },
                   child: Text(
-                    "Messages",
+                    "Меню",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -61,7 +61,7 @@ class Menu extends StatelessWidget {
                     onMenuItemClicked();
                   },
                   child: Text(
-                    "Utility Bills",
+                    "Карта",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 22,
@@ -70,9 +70,6 @@ class Menu extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30),
-                Text("Funds Transfer", style: TextStyle(color: Colors.white, fontSize: 22)),
-                SizedBox(height: 30),
-                Text("Branches", style: TextStyle(color: Colors.white, fontSize: 22)),
               ],
             ),
           ),

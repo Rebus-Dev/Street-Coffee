@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
 import 'package:StreetCoffee/screens/MenuDashboardLayout/Dashboard.dart';
-import 'package:StreetCoffee/screens/Pages/MessagesPage.dart';
+import 'package:StreetCoffee/screens/Pages/MenuPage.dart';
 import 'package:StreetCoffee/screens/Pages/MyCardsPage.dart';
-import 'package:StreetCoffee/screens/Pages/UtilityBillsPage.dart';
+import 'package:StreetCoffee/screens/Pages/CardBillsPage.dart';
 
 import 'menu.dart';
 
