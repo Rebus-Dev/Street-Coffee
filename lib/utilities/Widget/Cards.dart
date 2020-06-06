@@ -28,7 +28,7 @@ Widget CardsDashboard() {
   );
 }
 
-Widget CardsGradient(BuildContext context, String name, NetworkImage imageCategory, Color colorCard) {
+Widget CardsMenu(BuildContext context, String name, NetworkImage imageCategory, Color colorCard) {
   return new Container(
     height: 150.0,
     margin: new EdgeInsets.all(10.0),
@@ -38,21 +38,16 @@ Widget CardsGradient(BuildContext context, String name, NetworkImage imageCatego
     ),
     child: new Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new Padding(padding: new EdgeInsets.only(left: 30.0, right: 10.0),
+      children: <Widget> [
+          new Padding(padding: new EdgeInsets.only(left: 20.0, right: 0.0),
           child: new CircleAvatar(radius: 35.0, backgroundImage: imageCategory)
         ),
-        new Expanded(
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-            )
-          ),
-        new Padding(padding: new EdgeInsets.only(left: 10.0, right: 50.0),
+        new Padding(
+          padding: new EdgeInsets.only(left: 20.0, right: 0.0),
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text(name, style: new TextStyle(fontSize: 25.0, color: Colors.white70),),
+              new Text(name, style: new TextStyle(fontSize: 20.0, color: Colors.white70)),
             ],
           )
         )

@@ -6,7 +6,9 @@ import 'package:StreetCoffee/utilities/Widget/Cards.dart';
 class MenuPage extends StatelessWidget with NavigationStates {
   final Function onMenuTap;
 
-  const MenuPage({Key key, this.onMenuTap}) : super(key: key);
+  const MenuPage({
+    Key key, this.onMenuTap
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,11 @@ class MenuPage extends StatelessWidget with NavigationStates {
           SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                CardsGradient(context, "Гарячі напої", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
-                SizedBox(height: 10),
-                CardsGradient(context, "Холодні напої", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
-                SizedBox(height: 10),
-                CardsGradient(context, "Десерти", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
+                CardsMenu(context, "Гарячі напої", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
+                SizedBox(height: 5),
+                CardsMenu(context, "Холодні напої", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
+                SizedBox(height: 5),
+                CardsMenu(context, "Десерти", NetworkImage('https://wallpapercave.com/wp/wp2365076.jpg'), Color(0xFF1b1b1b)),
                 SizedBox(height: 10),
               ],
             )
