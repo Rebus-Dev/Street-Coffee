@@ -23,6 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    
+  slimy_card: ^1.0.4
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -50,6 +52,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/google.jpg
     - assets/images/facebook.jpg
+    - assets/images/coffee.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

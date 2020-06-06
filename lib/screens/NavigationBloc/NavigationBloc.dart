@@ -9,12 +9,14 @@ enum NavigationEvents {
   UtilityClickedEvent
 }
 
-abstract class NavigationStates {}
+abstract class NavigationStates { }
 
 class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
   final Function onMenuTap;
 
-  NavigationBloc({this.onMenuTap});
+  NavigationBloc({
+    this.onMenuTap
+  });
 
   @override
   NavigationStates get initialState => MyCardsPage(
@@ -30,12 +32,12 @@ class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
         );
         break;
       case NavigationEvents.MessagesClickedEvent:
-        yield MessagesPage(
+        yield MenuPage(
           onMenuTap: onMenuTap,
         );
         break;
       case NavigationEvents.UtilityClickedEvent:
-        yield UtilityBillsPage(
+        yield CardBillsPage(
           onMenuTap: onMenuTap,
         );
         break;
