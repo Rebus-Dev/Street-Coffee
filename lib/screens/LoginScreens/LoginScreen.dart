@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:StreetCoffee/utilities/Constants.dart';
+import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
+import 'package:StreetCoffee/utilities/Widget/Button.dart';
+
+import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
+import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
 
 class LoginScreen extends StatefulWidget {
-
   @override
   _LoginScreenState createState() => _LoginScreenState();
 
@@ -70,50 +75,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 15.0),
-            _buildFieldsData(),
+            DataField(),
+
             SizedBox(height: 20.0),
             _buildRememberSignIn(),
+
             SizedBox(height: 20.0),
-            _buildLoginButton(),
-            _buildSignInWithText(),
-            _buildSocialBtnRow()
+
+            _buildLoginButton(context),
+            SignInWithText('Увійти за допомогою'),
+            SocialBtnRow(),
+            _buildSignupButton()
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFieldsData() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          "Мобільний телефон",
-          style: kLabelStyle
-        ),
-        SizedBox(height: 10.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.call,
-                color: Colors.white,
-              ),
-              hintText: "Введіть будь ласка моб. тел.",
-              hintStyle: kHintTextStyle
-            ),
-          ),
-        )
-      ],
-    );
-  }
+
 
   Widget _buildRememberSignIn() {
     return Container(
@@ -141,13 +120,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildLoginButton() {
+  Widget _buildLoginButton(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
+      padding: EdgeInsets.symmetric(vertical: 15.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MenuDashboardLayout())
+          );
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -165,74 +149,35 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSignInWithText() {
-    return Column(
-      children: <Widget>[
-        Text(
-          'Або',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 20.0),
-        Text(
-          'Увійти за допомогою',
-          style: TextStyle(
-            color: Colors.white,
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ],
-    );
-  }
-
-Widget _buildSocialBtn(Function onTap, AssetImage logo) {
+  Widget _buildSignupButton() {
     return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 50.0,
-        width: 50.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => RegistrationScreen())
+        );
+      },
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'У вас немає облікового запису? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Зареєструйтесь',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
-          image: DecorationImage(
-            image: logo,
-          ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            AssetImage(
-              "assets/images/facebook.jpg",
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            AssetImage(
-              "assets/images/google.jpg",
-            ),
-          ),
-        ],
       ),
     );
   }
