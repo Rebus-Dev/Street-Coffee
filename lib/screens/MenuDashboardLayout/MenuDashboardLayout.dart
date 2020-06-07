@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
 import 'package:StreetCoffee/screens/MenuDashboardLayout/Dashboard.dart';
@@ -11,6 +13,10 @@ import 'menu.dart';
 final Color backgroundColor = Color(0xFF038C61);
 
 class MenuDashboardLayout extends StatefulWidget {
+  final FirebaseUser user;
+
+  MenuDashboardLayout({this.user});
+
   @override
   _MenuDashboardLayoutState createState() => _MenuDashboardLayoutState();
 }

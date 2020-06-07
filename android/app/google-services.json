@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "217993206758",
+    "firebase_url": "https://streetcoffee-38927.firebaseio.com",
+    "project_id": "streetcoffee-38927",
+    "storage_bucket": "streetcoffee-38927.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217993206758:android:9cb090ea8b79e5e9401427",
+        "android_client_info": {
+          "package_name": "com.example.StreetCoffee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217993206758-7u2soldlenh3gerui6rl71o07mdsq4v8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFcWhQOJiKjqbVhxRUvOozqy1Floe9PW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217993206758-7u2soldlenh3gerui6rl71o07mdsq4v8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:StreetCoffee/utilities/Constants.dart';
-import 'package:StreetCoffee/utilities/Widget/DataFields.dart';
+import 'package:StreetCoffee/utilities/Auth/AuthUser.dart';
 import 'package:StreetCoffee/utilities/Widget/Button.dart';
 
-import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+
+  final _phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,37 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: 15.0),
-            DataField(),
+            
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Мобільний телефон",
+                  style: kLabelStyle
+                ),
+                SizedBox(height: 10.0),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  decoration: kBoxDecorationStyle,
+                  height: 60.0,
+                  child: TextField(
+                    keyboardType: TextInputType.phone,
+                    style: TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.only(top: 14.0),
+                      prefixIcon: Icon(
+                        Icons.call,
+                        color: Colors.white,
+                      ),
+                      hintText: "Введіть будь ласка моб. тел.",
+                      hintStyle: kHintTextStyle
+                    ),
+                    controller: _phoneController,
+                  ),
+                )
+              ],
+            ),
 
             SizedBox(height: 20.0),
             _buildRememberSignIn(),
@@ -127,10 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MenuDashboardLayout())
-          );
+          final phone = _phoneController.text.trim();
+
+          AuthUser().loginUser(phone, context);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
