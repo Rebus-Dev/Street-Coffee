@@ -159,7 +159,11 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           final phone = _phoneController.text.trim();
 
-          AuthUser().loginUser(phone, context);
+          AuthUser().loginUser(
+            phone, 
+            context,
+            _rememberMe
+          );
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

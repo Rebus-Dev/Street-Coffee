@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
+import 'package:StreetCoffee/utilities/Auth/AuthDataInstancce.dart';
+
 import 'package:flutter/material.dart';
 
 class AuthUserLogic {
-  void checkUserEnterCode(BuildContext context, TextEditingController _codeController, FirebaseAuth _auth, String verificationId) async {
+  void checkUserEnterCode(BuildContext context, TextEditingController _codeController, FirebaseAuth _auth, String verificationId, bool saveUserSesion) async {
     final code = _codeController.text.trim();
     AuthCredential credential = PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: code);
 
@@ -21,6 +24,8 @@ class AuthUserLogic {
     FirebaseUser user = result.user;
 
     if (user != null) {
+      _checkSaveSesion(saveUserSesion);
+
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => MenuDashboardLayout(user: user,)
       ));
@@ -50,12 +55,19 @@ class AuthUserLogic {
   void verificationFailed(AuthException exception) {
     print(exception.message);
   }
+
+  void _checkSaveSesion(bool saveUserSesion) {
+    if (saveUserSesion) {
+      SaveAndRead().save();
+    }
+  }
+  
 }
 
 class AuthUser {
   final _codeController = TextEditingController();
 
-  Future<bool> loginUser(String phone, BuildContext context) async {
+  Future<bool> loginUser(String phone, BuildContext context, bool saveUserSesion) async {
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
@@ -92,7 +104,8 @@ class AuthUser {
                         context,
                         _codeController,
                         _auth,
-                        verificationId
+                        verificationId,
+                        saveUserSesion
                       );
                     },
                   )

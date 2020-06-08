@@ -95,8 +95,8 @@ class _MenuDashboardLayoutState extends State<MenuDashboardLayout> with SingleTi
               isCollapsed: isCollapsed,
               screenWidth: screenWidth,
               child: BlocBuilder<NavigationBloc, NavigationStates>(builder: (context,
-                  NavigationStates navigationState,) {
-                return navigationState as Widget;
+                NavigationStates navigationState,) {
+                  return navigationState as Widget;
               }),
             ),
           ],
