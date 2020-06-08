@@ -61,7 +61,7 @@ class AuthUserLogic {
       SaveAndRead().save();
     }
   }
-  
+
 }
 
 class AuthUser {
