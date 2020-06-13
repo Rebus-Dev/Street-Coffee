@@ -39,7 +39,7 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
                   Icon(Icons.settings, color: Colors.black),
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 30),
               Text(
                 "Новини",
                 style: TextStyle(color: Colors.black, fontSize: 20),

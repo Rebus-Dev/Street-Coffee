@@ -1,27 +1,45 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 Widget CardsDashboard() {
   return Container(
-    height: 200,
+    height: 500,
     child: PageView(
     controller: PageController(viewportFraction: 1.0),
     scrollDirection: Axis.horizontal,
     pageSnapping: true,
       children: <Widget>[
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          color: Colors.redAccent,
-          width: 100,
+        Card(
+          elevation: 4.0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[ 
+              Image.network(
+                "http://185.86.78.46/news_1.jpeg",
+                fit: BoxFit.contain,
+                  height: 480.0,
+                  width: 320.0,
+              )
+            ],
+          ),
         ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          color: Colors.blueAccent,
-          width: 100,
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          color: Colors.greenAccent,
-          width: 100,
+        Card(
+          elevation: 4.0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[ 
+              Image.network(
+                "http://185.86.78.46/news_1.jpeg",
+                fit: BoxFit.contain,
+                  height: 480.0,
+                  width: 320.0,
+              )
+            ],
+          ),
         ),
       ],
     ),
