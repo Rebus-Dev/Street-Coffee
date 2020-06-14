@@ -23,7 +23,7 @@ class _RootPageState extends State<RootPage> {
     super.initState();
     userSignIn.read().then((userId) {
       setState(() {
-        if (userId) {
+        if (userId.isNotEmpty) {
           authStatus = AuthStatus.signedIn;
         } else {
           authStatus = AuthStatus.notSignedIn;

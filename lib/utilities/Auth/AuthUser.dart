@@ -2,12 +2,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:StreetCoffee/utilities/Auth/AuthDataInstancce.dart';
+import 'package:firebase_database/firebase_database.dart';
+
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 import 'package:flutter/material.dart';
 
 class AuthUserLogic {
-  void checkUserEnterCode(BuildContext context, TextEditingController _codeController, FirebaseAuth _auth, String verificationId, bool saveUserSesion) async {
+  final DBRef = FirebaseDatabase.instance.reference().child("users");
+
+  void checkUserEnterCode(BuildContext context, TextEditingController _codeController, 
+                          FirebaseAuth _auth, String verificationId, 
+                          bool saveUserSesion, String phone) async {
     final code = _codeController.text.trim();
+
     AuthCredential credential = PhoneAuthProvider.getCredential(verificationId: verificationId, smsCode: code);
 
     AuthResult result;
@@ -24,8 +33,9 @@ class AuthUserLogic {
     FirebaseUser user = result.user;
 
     if (user != null) {
-      _checkSaveSesion(saveUserSesion);
-
+      _saveDataDB(phone);
+      _checkSaveSesion(saveUserSesion, phone);
+      
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => MenuDashboardLayout(user: user,)
       ));
@@ -56,10 +66,25 @@ class AuthUserLogic {
     print(exception.message);
   }
 
-  void _checkSaveSesion(bool saveUserSesion) {
+  void _checkSaveSesion(bool saveUserSesion, String phone) {
     if (saveUserSesion) {
-      SaveAndRead().save();
+      SaveAndRead().save(phone);
     }
+  }
+
+  void _saveDataDB(String phone) {
+    DBRef.once().then((DataSnapshot dataSnapshot) {
+      if (dataSnapshot.value == null) {
+        DBRef.child(generateMd5(phone)).set({
+          'phone' : phone,
+          'code'  : '0000'
+        });
+      }
+    });
+  }
+
+  String generateMd5(String input) {
+    return md5.convert(utf8.encode(input)).toString();
   }
 
 }
@@ -105,7 +130,8 @@ class AuthUser {
                         _codeController,
                         _auth,
                         verificationId,
-                        saveUserSesion
+                        saveUserSesion,
+                        phone
                       );
                     },
                   )

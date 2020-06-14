@@ -1,18 +1,17 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SaveAndRead {
-  void save() async {
+  void save(String phone) async {
     final preferencesSave = await SharedPreferences.getInstance();
     final keySave = "loginSave";
-    final value = true;
 
-    preferencesSave.setBool(keySave, value);
+    preferencesSave.setString(keySave, phone);
   }
 
-  Future<bool> read() async {
+  Future<String> read() async {
     final preferencesGet = await SharedPreferences.getInstance();
     final keySave = "loginSave";
-    final value = preferencesGet.getBool(keySave) ?? false;
+    final value = preferencesGet.getString(keySave) ?? '';
     
     return value;
   }
