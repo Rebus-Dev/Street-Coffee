@@ -1,0 +1,37 @@
+{
+  "cold_drinks" : {
+    "image" : "http://185.86.78.46/news_1.jpeg",
+    "list" : [ 
+      "Фреш"
+    ],
+    "name" : "Холодні напої"
+  },
+  "desserts" : {
+    "image" : "http://185.86.78.46/news_1.jpeg",
+    "list" : [ 
+      "Coockie" 
+    ],
+    "name" : "Десерти"
+  },
+  "hot_drinks" : {
+    "image" : "http://185.86.78.46/news_1.jpeg",
+    "list" : [ 
+      "Допіо" 
+    ],
+    "name" : "Гарячі напої"
+  },
+  "news" : [ 
+    "http://185.86.78.46/news_1.jpeg", 
+    "http://185.86.78.46/news_1.jpeg" 
+  ],
+  "shares" : [ 
+    "http://185.86.78.46/news_2.jpeg", 
+    "http://185.86.78.46/news_2.jpeg" 
+  ],
+  "users" : {
+    "3b932bf17cd4e2a63e262f8a8609494a" : {
+      "code" : "0171",
+      "phone" : "+380964997114"
+    }
+  }
+}

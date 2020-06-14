@@ -1,3 +1,4 @@
+import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:flutter/material.dart';
 
 import 'package:StreetCoffee/utilities/Constants.dart';
@@ -9,7 +10,6 @@ import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
-
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -160,7 +160,11 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           final phone = _phoneController.text.trim();
 
-          AuthUser().loginUser(phone, context);
+          AuthUser().loginUser(
+            phone, 
+            context,
+            _rememberMe
+          );
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

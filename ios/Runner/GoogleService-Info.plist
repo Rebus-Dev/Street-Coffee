@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>217993206758-2t2bi0i5bkit8bnt20anr46n3lm1t55i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.217993206758-2t2bi0i5bkit8bnt20anr46n3lm1t55i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>217993206758-3bhl8cgqkp8m9ppgb3oq0mrhq1d5k8g2.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA76kSkQCxSNzznzorxP2mvXSZnZGUVLDY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>217993206758</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.StreetCoffee</string>
+	<key>PROJECT_ID</key>
+	<string>streetcoffee-38927</string>
+	<key>STORAGE_BUCKET</key>
+	<string>streetcoffee-38927.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:217993206758:ios:19e47a8c7fb44364401427</string>
+	<key>DATABASE_URL</key>
+	<string>https://streetcoffee-38927.firebaseio.com</string>
+</dict>
+</plist>
