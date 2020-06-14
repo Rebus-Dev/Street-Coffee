@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   
+  # Rx
+  rxdart: ^0.22.2
+
   # Save Data
   shared_preferences: ^0.4.3
 
