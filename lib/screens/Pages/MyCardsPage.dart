@@ -52,7 +52,7 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
               SizedBox(height: 20),
-              CardsDashboard("news"),
+              CardsDashboard("shares"),
               SizedBox(height: 20),
             ],
           ),
