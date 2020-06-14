@@ -3,6 +3,12 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
 
+RegExp regExp = new RegExp(
+  r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
+  caseSensitive: false,
+  multiLine: false,
+);
+
 class GetDateImage {
   var subject = new PublishSubject<String>();
 
@@ -22,12 +28,6 @@ class RenderCards {
 
   List<Widget> renderCard(List<String> url) {
     List<Widget> card = [ ];
-
-    RegExp regExp = new RegExp(
-      r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
-      caseSensitive: false,
-      multiLine: false,
-    );
 
     for (int i = 0; i < url.length; i++) {
       card.add( 
@@ -50,6 +50,36 @@ class RenderCards {
       );
     }
     return card;
+  }
+
+  Widget renderRow(AsyncSnapshot snapsot) {
+    return new Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget> [
+        new Padding(
+          padding: new EdgeInsets.only(left: 20.0, right: 0.0),
+          child: new CircleAvatar(
+            radius: 35.0, 
+            backgroundImage: NetworkImage(regExp.stringMatch(snapsot.data).toString())
+          )
+        ),
+        new Padding(
+          padding: new EdgeInsets.only(left: 20.0, right: 0.0),
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text(
+                new RegExp(r"[а-яА-Я].+,").stringMatch(snapsot.data).toString(), 
+                style: new TextStyle(
+                  fontSize: 20.0, 
+                  color: Colors.white70
+                )
+              ),
+            ],
+          )
+        )
+      ],
+    );
   }
 }
 
@@ -82,30 +112,33 @@ Widget CardsDashboard(String childDataName) {
   );
 }
 
-Widget CardsMenu(BuildContext context, String name, NetworkImage imageCategory, Color colorCard) {
-  return new Container(
-    height: 150.0,
-    margin: new EdgeInsets.all(10.0),
-    decoration: new BoxDecoration(
-      borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
-      color: colorCard
-    ),
-    child: new Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget> [
-          new Padding(padding: new EdgeInsets.only(left: 20.0, right: 0.0),
-          child: new CircleAvatar(radius: 35.0, backgroundImage: imageCategory)
-        ),
-        new Padding(
-          padding: new EdgeInsets.only(left: 20.0, right: 0.0),
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              new Text(name, style: new TextStyle(fontSize: 20.0, color: Colors.white70)),
-            ],
-          )
-        )
-      ],
+Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
+  var subject = new PublishSubject<String>();
+  var getImage = new GetDateImage();
+  
+  subject = getImage._readDate(nameBranch);
+
+  return new GestureDetector (
+    onTap: () {
+      print("Hello !!!--->>>");
+    },
+    child: new Container(
+      height: 150.0,
+      margin: new EdgeInsets.all(10.0),
+      decoration: new BoxDecoration(
+        borderRadius: new BorderRadius.all(new Radius.circular(10.0)),
+        color: colorCard
+      ),
+      child: StreamBuilder(
+        stream: subject.stream,
+        builder: (context, snapsot) {
+          if (snapsot.data == null) {
+            return CircularProgressIndicator();
+          }
+
+          return RenderCards().renderRow(snapsot);
+        },
+      )
     ),
   );
 }
