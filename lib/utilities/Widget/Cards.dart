@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:StreetCoffee/screens/Pages/MenuListPage.dart';
 
 RegExp regExp = new RegExp(
   r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
@@ -51,7 +52,7 @@ class RenderCards {
     }
     return card;
   }
-
+  
   Widget renderRow(AsyncSnapshot snapsot) {
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,7 +121,9 @@ Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
 
   return new GestureDetector (
     onTap: () {
-      print("Hello !!!--->>>");
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => MenuListPage()
+      ));
     },
     child: new Container(
       height: 150.0,
