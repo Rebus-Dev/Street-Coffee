@@ -23,6 +23,7 @@
 import 'package:StreetCoffee/screens/LoginScreens/LoginScreen.dart';
 import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:StreetCoffee/utilities/Auth/AuthDataInstancce.dart';
+
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
@@ -43,6 +44,8 @@ class _RootPageState extends State<RootPage> {
 
   initState() {
     super.initState();
+
+
     userSignIn.read().then((userId) {
       setState(() {
         if (userId.isNotEmpty) {

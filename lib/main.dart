@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 import 'package:StreetCoffee/RootPage.dart';
+import 'package:StreetCoffee/utilities/Servise/firebase_notification_handler.dart';
 
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,8 @@ class StreetCoffee extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MessagingWidgetState().initState();
+
     return MaterialApp(
       title: "Street Coffee",
       debugShowCheckedModeBanner: true,
