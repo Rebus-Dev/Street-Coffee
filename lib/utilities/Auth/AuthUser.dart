@@ -55,8 +55,8 @@ class AuthUserLogic {
     FirebaseUser user = result.user;
 
     if (user != null) {
-      _saveDataDB(phone);
-      _checkSaveSesion(saveUserSesion, phone);
+      saveDataDB(phone, '');
+      checkSaveSesion(saveUserSesion, phone);
       
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => MenuDashboardLayout(user: user,)
@@ -88,17 +88,22 @@ class AuthUserLogic {
     print(exception.message);
   }
 
-  void _checkSaveSesion(bool saveUserSesion, String phone) {
+  void checkSaveSesion(bool saveUserSesion, String phone) {
     if (saveUserSesion) {
       SaveAndRead().save(phone);
     }
   }
 
-  void _saveDataDB(String phone) {
+  void saveDataDB(String phone, String email) {
     DBRef.once().then((DataSnapshot dataSnapshot) {
-      if (dataSnapshot.value == null) {
+      if (dataSnapshot.value == null && phone != '') {
         DBRef.child(generateMd5(phone)).set({
           'phone' : phone,
+          'code'  : '0000'
+        });
+      } else {
+        DBRef.child(generateMd5(email)).set({
+          'email' : email,
           'code'  : '0000'
         });
       }

@@ -28,8 +28,6 @@ import 'package:StreetCoffee/utilities/Constants.dart';
 import 'package:StreetCoffee/utilities/Auth/AuthUser.dart';
 import 'package:StreetCoffee/utilities/Widget/Button.dart';
 
-import 'package:StreetCoffee/screens/LoginScreens/RegistrationScreen.dart';
-
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -138,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             _buildLoginButton(context),
             SignInWithText('Увійти за допомогою'),
-            SocialBtnRow(),
+            SocialBtnRow(context, _rememberMe),
             _buildSignupButton()
           ],
         ),
@@ -208,12 +206,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignupButton() {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => RegistrationScreen())
-        );
-      },
       child: RichText(
         text: TextSpan(
           children: [

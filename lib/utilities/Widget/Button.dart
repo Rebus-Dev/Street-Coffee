@@ -21,6 +21,9 @@
 // SOFTWARE.
 
 import 'package:flutter/material.dart';
+import 'package:StreetCoffee/utilities/Auth/GoogleSignIn.dart';
+
+import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 
 Widget SignInWithText(String textLabel) {
     return Column(
@@ -71,7 +74,7 @@ Widget SocialBtn(Function onTap, AssetImage logo) {
     );
   }
 
-  Widget SocialBtnRow() {
+  Widget SocialBtnRow(BuildContext context, bool saveUserSesion) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 20.0),
       child: Row(
@@ -84,7 +87,18 @@ Widget SocialBtn(Function onTap, AssetImage logo) {
             ),
           ),
           SocialBtn(
-            () => print('Login with Google'),
+            () => {
+              signInWithGoogle(saveUserSesion).whenComplete(() {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      
+                      return new MenuDashboardLayout();
+                    },
+                  ),
+                );
+              })
+            },
             AssetImage(
               "assets/images/google.jpg",
             ),
