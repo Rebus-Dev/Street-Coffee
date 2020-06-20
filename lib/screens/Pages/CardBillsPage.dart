@@ -20,10 +20,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:slimy_card/slimy_card.dart';
 
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
+
+RegExp regExp = new RegExp(
+  r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
+  caseSensitive: false,
+  multiLine: false,
+);
+
+class GetDateImage {
+  var subject = new PublishSubject<String>();
+
+  PublishSubject<String> _readDate(String childName) {
+    final DBRef = FirebaseDatabase.instance.reference().child(childName);
+    
+    DBRef.once().then((DataSnapshot dataSnapshot) {
+      subject.add(dataSnapshot.value.toString());
+    });
+
+    return subject;
+  }
+
+}
 
 class CardBillsPage extends StatelessWidget with NavigationStates {
 

@@ -33,11 +33,30 @@ RegExp regExp = new RegExp(
 );
 
 class GetDateImage {
-  var subject = new PublishSubject<String>();
+  var subject = new PublishSubject<Map<String, dynamic>>();
 
-  PublishSubject<String> _readDate(String childName) {
+  PublishSubject<Map<String, dynamic>> _readDate(String childName) {
     final DBRef = FirebaseDatabase.instance.reference().child(childName);
     
+    String url = '';
+    String name = '';
+
+    DBRef.once().then((DataSnapshot dataSnapshot) {
+      url = dataSnapshot.value["image"];
+      name = dataSnapshot.value["name"];
+
+      Map<String, dynamic> tmpValue = { "image": url, "name": name };
+
+      subject.add(tmpValue);
+    });
+
+    return subject;
+  }
+
+  PublishSubject<String> _readNews(String childName) {
+    var subject = new PublishSubject<String>();
+    final DBRef = FirebaseDatabase.instance.reference().child(childName);
+
     DBRef.once().then((DataSnapshot dataSnapshot) {
       subject.add(dataSnapshot.value.toString());
     });
@@ -75,7 +94,7 @@ class RenderCards {
     return card;
   }
   
-  Widget renderRow(AsyncSnapshot snapsot) {
+  Widget renderRow(Map<String, dynamic> snapsot) {
     return new Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget> [
@@ -83,7 +102,7 @@ class RenderCards {
           padding: new EdgeInsets.only(left: 20.0, right: 0.0),
           child: new CircleAvatar(
             radius: 35.0, 
-            backgroundImage: NetworkImage(regExp.stringMatch(snapsot.data).toString())
+            backgroundImage: NetworkImage(regExp.stringMatch(snapsot["image"]).toString())
           )
         ),
         new Padding(
@@ -92,7 +111,7 @@ class RenderCards {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Text(
-                new RegExp(r"[а-яА-Я].+,").stringMatch(snapsot.data).toString(), 
+                snapsot["name"],
                 style: new TextStyle(
                   fontSize: 20.0, 
                   color: Colors.white70
@@ -110,7 +129,7 @@ Widget CardsDashboard(String childDataName) {
   var subject = new PublishSubject<String>();
   var getImage = new GetDateImage();
   
-  subject = getImage._readDate(childDataName);
+  subject = getImage._readNews(childDataName);
   
   return Container(
     height: 500,
@@ -122,7 +141,7 @@ Widget CardsDashboard(String childDataName) {
         }
 
         var urls = snapsot.data.split(',');
-
+        
         return PageView(
           controller: PageController(viewportFraction: 1.0),
           scrollDirection: Axis.horizontal,
@@ -136,7 +155,7 @@ Widget CardsDashboard(String childDataName) {
 }
 
 Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
-  var subject = new PublishSubject<String>();
+  var subject = new PublishSubject<Map<String, dynamic>>();
   var getImage = new GetDateImage();
   
   subject = getImage._readDate(nameBranch);
@@ -161,7 +180,7 @@ Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
             return CircularProgressIndicator();
           }
 
-          return RenderCards().renderRow(snapsot);
+          return RenderCards().renderRow(snapsot.data);
         },
       )
     ),

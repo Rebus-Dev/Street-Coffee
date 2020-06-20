@@ -99,12 +99,10 @@ class AuthUserLogic {
       if (dataSnapshot.value == null && phone != '') {
         DBRef.child(generateMd5(phone)).set({
           'phone' : phone,
-          'code'  : '0000'
         });
       } else {
         DBRef.child(generateMd5(email)).set({
           'email' : email,
-          'code'  : '0000'
         });
       }
     });

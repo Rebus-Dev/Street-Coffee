@@ -29,6 +29,7 @@ import 'package:StreetCoffee/screens/MenuDashboardLayout/Dashboard.dart';
 import 'package:StreetCoffee/screens/Pages/MenuPage.dart';
 import 'package:StreetCoffee/screens/Pages/MyCardsPage.dart';
 import 'package:StreetCoffee/screens/Pages/CardBillsPage.dart';
+import 'package:StreetCoffee/utilities/Servise/get_user_data.dart';
 
 import 'menu.dart';
 
@@ -55,10 +56,15 @@ class _MenuDashboardLayoutState extends State<MenuDashboardLayout> with SingleTi
   @override
   void initState() {
     super.initState();
+
+    GetUserData().GetData();
+
     _controller = AnimationController(vsync: this, duration: duration);
     _scaleAnimation = Tween<double>(begin: 1, end: 0.8).animate(_controller);
     _menuScaleAnimation = Tween<double>(begin: 0.5, end: 1).animate(_controller);
     _slideAnimation = Tween<Offset>(begin: Offset(-1, 0), end: Offset(0, 0)).animate(_controller);
+
+
   }
 
   @override
