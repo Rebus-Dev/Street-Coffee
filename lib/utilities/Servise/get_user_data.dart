@@ -34,12 +34,12 @@ class GetUserData {
 
   String md5Phone;
 
-  void GetData() {
-    Future<String> userSave = getStorageData.read();
+  void GetData(String code) {
+    Future<String> userSave = getStorageData.read("loginSaveTmp");
 
     userSave.then((value) => {
       md5Phone = _CheckData(value),
-      _CheckUserDB(md5Phone)
+      _CheckUserDB(md5Phone, code, value)
     });
   }
 
@@ -51,14 +51,29 @@ class GetUserData {
     }
   }
 
-  void _CheckUserDB(String hashUser) {
+  void _CheckUserDB(String hashUser, String code, String phone) {
+    bool emailOrPhone = phoneOrEmail(phone);
+    
     try {
       final userDB = DBRef.child(hashUser);
 
       if (userDB != null) {
-        userDB.child("code");
-        userDB.once().then((DataSnapshot dataSnapshot) {
-            
+        userDB.child("code").once().then((DataSnapshot dataSnapshot) {
+          if (dataSnapshot.value == null) {
+            if (emailOrPhone) {
+              userDB.set({
+                'email' : phone,
+                'code' : code,
+              });
+            } else {
+              userDB.set({
+                'phone' : phone,
+                'code' : code,
+              });
+            }
+          } else {
+
+          }
         });
       }
 
@@ -66,4 +81,15 @@ class GetUserData {
       print("Not user: ${ex.code}");
     }
   }
+
+  bool phoneOrEmail(String value) {
+    RegExp regExp = new RegExp(
+      r"@",
+      caseSensitive: false,
+      multiLine: false,
+    );
+    
+    return regExp.hasMatch(value);
+  }
+
 }

@@ -90,22 +90,31 @@ class AuthUserLogic {
 
   void checkSaveSesion(bool saveUserSesion, String phone) {
     if (saveUserSesion) {
-      SaveAndRead().save(phone);
+      SaveAndRead().save(phone, "loginSave");
+      SaveAndRead().save(phone, "loginSaveTmp");
+    } else {
+      SaveAndRead().save(phone, "loginSaveTmp");
     }
   }
 
   void saveDataDB(String phone, String email) {
-    DBRef.once().then((DataSnapshot dataSnapshot) {
-      if (dataSnapshot.value == null && phone != '') {
-        DBRef.child(generateMd5(phone)).set({
-          'phone' : phone,
-        });
-      } else {
-        DBRef.child(generateMd5(email)).set({
-          'email' : email,
-        });
-      }
-    });
+    if (phone.isNotEmpty) {
+      DBRef.child(generateMd5(phone)).once().then((dataSnapshot) {
+        if (dataSnapshot.value == null) {
+          DBRef.child(generateMd5(phone)).set({
+            'phone' : phone,
+          });
+        }
+      });
+    } else if (email.isNotEmpty) {
+      DBRef.child(generateMd5(email)).once().then((dataSnapshot) {
+        if (dataSnapshot.value == null) {
+          DBRef.child(generateMd5(email)).set({
+            'email' : email,
+          });
+        }
+      });
+    }
   }
 
   String generateMd5(String input) {

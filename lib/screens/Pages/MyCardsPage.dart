@@ -23,6 +23,7 @@
 import 'package:flutter/material.dart';
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
 import 'package:StreetCoffee/utilities/Widget/Cards.dart';
+import 'package:StreetCoffee/utilities/Servise/get_user_data.dart';
 
 class MyCardsPage extends StatelessWidget with NavigationStates { 
   
@@ -58,7 +59,12 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
                     },
                   ),
                   Text("Головна", style: TextStyle(fontSize: 24, color: Colors.black)),
-                  Icon(Icons.settings, color: Colors.black),
+                  new InkWell(
+                    child: Icon(Icons.settings, color: Colors.black),
+                    onTap: () {
+                      addCodeUser(context);
+                    },
+                  )
                 ],
               ),
               SizedBox(height: 30),
@@ -82,4 +88,43 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
       ),
     );
   }
+
+  Widget addCodeUser(BuildContext context) {
+    final _codeController = TextEditingController();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Введіть персональний код"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: _codeController,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Зберегти"),
+              textColor: Colors.white,
+              color: Color(0xFF04B47C),
+                onPressed: () {
+                  final code = _codeController.text.trim().toString();
+
+                  if (code.isEmpty) {
+                    Navigator.of(context).pop();
+                  }
+                  
+                  GetUserData().GetData(code);
+                },
+            )
+          ],
+        );
+      }
+    );
+  }
+
 }

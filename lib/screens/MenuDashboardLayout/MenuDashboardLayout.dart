@@ -57,8 +57,6 @@ class _MenuDashboardLayoutState extends State<MenuDashboardLayout> with SingleTi
   void initState() {
     super.initState();
 
-    GetUserData().GetData();
-
     _controller = AnimationController(vsync: this, duration: duration);
     _scaleAnimation = Tween<double>(begin: 1, end: 0.8).animate(_controller);
     _menuScaleAnimation = Tween<double>(begin: 0.5, end: 1).animate(_controller);

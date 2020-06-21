@@ -66,12 +66,8 @@ Future<void> signInWithGoogle(bool _rememberMe) async {
     var user = await _auth.signInWithCredential(credential);
     var email = user.user.email;
     
-    if (_rememberMe) {
-      AuthUserLogic().checkSaveSesion(_rememberMe, email);
-      AuthUserLogic().saveDataDB('', email);
-    } else {
-      AuthUserLogic().saveDataDB('', email);
-    }
+    AuthUserLogic().checkSaveSesion(_rememberMe, email);
+    AuthUserLogic().saveDataDB('', email);
 }
 
 void signOutGoogle() async{

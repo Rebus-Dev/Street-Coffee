@@ -170,11 +170,11 @@ class RenderCards {
         Card(
           elevation: 5,
           child: Container(
-            height: 150.0,
+            height: 120.0,
             child: Row(
               children: <Widget>[
                 Container(
-                  height: 150.0,
+                  height: 120.0,
                   width: 80.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -188,7 +188,7 @@ class RenderCards {
                   ),
                 ),
                 Container(
-                  height: 150,
+                  height: 120,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
                     child: Column(
@@ -216,7 +216,7 @@ class RenderCards {
                               child: Text(
                                 snapsot[item]["descr"],
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 12,
                                   color: Color.fromARGB(255, 48, 48, 54)
                                 ),
                               ),

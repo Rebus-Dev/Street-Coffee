@@ -45,8 +45,7 @@ class _RootPageState extends State<RootPage> {
   initState() {
     super.initState();
 
-
-    userSignIn.read().then((userId) {
+    userSignIn.read("loginSave").then((userId) {
       setState(() {
         if (userId.isNotEmpty) {
           authStatus = AuthStatus.signedIn;
