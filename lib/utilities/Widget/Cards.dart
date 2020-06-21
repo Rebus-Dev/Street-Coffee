@@ -66,7 +66,8 @@ class GetDateImage {
     String price = '';
 
     DBRef.once().then((DataSnapshot dataSnapshot) {
-      if (childName == "hot_drinks/list") {
+      bool ifInList = new RegExp('/list').hasMatch(childName);
+      if (ifInList) {
         for (final data in dataSnapshot.value) {
           
           url = data["image"];
@@ -169,12 +170,12 @@ class RenderCards {
         Card(
           elevation: 5,
           child: Container(
-            height: 100.0,
+            height: 150.0,
             child: Row(
               children: <Widget>[
                 Container(
-                  height: 100.0,
-                  width: 70.0,
+                  height: 150.0,
+                  width: 80.0,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(5),
@@ -187,7 +188,7 @@ class RenderCards {
                   ),
                 ),
                 Container(
-                  height: 100,
+                  height: 150,
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
                     child: Column(
