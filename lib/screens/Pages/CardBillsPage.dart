@@ -1,7 +1,52 @@
+// MIT License
+
+// Copyright (c) 2020 Rebus Dev
+
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:slimy_card/slimy_card.dart';
 
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
+
+RegExp regExp = new RegExp(
+  r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
+  caseSensitive: false,
+  multiLine: false,
+);
+
+class GetDateImage {
+  var subject = new PublishSubject<String>();
+
+  PublishSubject<String> _readDate(String childName) {
+    final DBRef = FirebaseDatabase.instance.reference().child(childName);
+    
+    DBRef.once().then((DataSnapshot dataSnapshot) {
+      subject.add(dataSnapshot.value.toString());
+    });
+
+    return subject;
+  }
+
+}
 
 class CardBillsPage extends StatelessWidget with NavigationStates {
 

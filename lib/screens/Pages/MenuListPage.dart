@@ -20,49 +20,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import 'package:bloc/bloc.dart';
-import 'package:StreetCoffee/screens/Pages/MenuPage.dart';
-import 'package:StreetCoffee/screens/Pages/MyCardsPage.dart';
-import 'package:StreetCoffee/screens/Pages/CardBillsPage.dart';
+import 'package:flutter/material.dart';
+import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
+import 'package:StreetCoffee/utilities/Widget/Cards.dart';
 
-enum NavigationEvents {
-  DashboardClickedEvent,
-  MessagesClickedEvent,
-  UtilityClickedEvent
-}
+class MenuListPage extends StatelessWidget with NavigationStates {
+  String nameBranch = '';
 
-abstract class NavigationStates { }
-
-class NavigationBloc extends Bloc<NavigationEvents, NavigationStates> {
-  final Function onMenuTap;
-
-  NavigationBloc({
-    this.onMenuTap
-  });
-
-  @override
-  NavigationStates get initialState => MyCardsPage(
-    onMenuTap: onMenuTap,
-  );
-
-  @override
-  Stream<NavigationStates> mapEventToState(NavigationEvents event) async* {
-    switch (event) {
-      case NavigationEvents.DashboardClickedEvent:
-        yield MyCardsPage(
-          onMenuTap: onMenuTap,
-        );
-        break;
-      case NavigationEvents.MessagesClickedEvent:
-        yield MenuPage(
-          onMenuTap: onMenuTap,
-        );
-        break;
-      case NavigationEvents.UtilityClickedEvent:
-        yield CardBillsPage(
-          onMenuTap: onMenuTap,
-        );
-        break;
-    }
+  MenuListPage(String nameBranch) {
+    this.nameBranch = nameBranch;
   }
+
+  @override
+  Widget build(BuildContext context) {
+    GetDateImage().readDateMenu(nameBranch);
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white70
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 50),
+                  CardsMenuItem(context, nameBranch + '/list'),
+                  SizedBox(height: 5),
+                ],
+              )
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }
