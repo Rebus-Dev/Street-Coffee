@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,40 @@ class GetDateImage {
       Map<String, dynamic> tmpValue = { "image": url, "name": name };
 
       subject.add(tmpValue);
+    });
+
+    return subject;
+  }
+
+  PublishSubject<List<Map<String, dynamic>>> readDateMenu(String childName) {
+    final DBRef = FirebaseDatabase.instance.reference().child(childName);
+    var subject = new PublishSubject<List<Map<String, dynamic>>>();
+
+    List<Map<String, dynamic>> tempList = new List();
+
+    String url = '';
+    String name = '';
+    String descr = '';
+    String price = '';
+
+    DBRef.once().then((DataSnapshot dataSnapshot) {
+      if (childName == "hot_drinks/list") {
+        for (final data in dataSnapshot.value) {
+          
+          url = data["image"];
+          name = data["name"];
+          descr = data["descr"];
+          price = data["price"];
+
+          Map<String, dynamic> tmpValue = { "image": url, "name": name, "descr" : descr, "price" : price };
+          
+          tempList.add(tmpValue);
+          
+        }
+
+        subject.add(tempList);
+      }      
+
     });
 
     return subject;
@@ -123,6 +158,90 @@ class RenderCards {
       ],
     );
   }
+
+  List<Widget> renderRowArray(List<Map<String, dynamic>> snapsot) {
+    print(snapsot.length);
+    
+    List<Widget> rows = List();
+    
+    for(int item = 0; item < snapsot.length; item++) {
+      rows.add(
+        Card(
+          elevation: 5,
+          child: Container(
+            height: 100.0,
+            child: Row(
+              children: <Widget>[
+                Container(
+                  height: 100.0,
+                  width: 70.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(5),
+                      topLeft: Radius.circular(5)
+                    ),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(snapsot[item]["image"])
+                    )
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          snapsot[item]["name"]                
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.teal),
+                            ),
+                            child: Text(
+                              snapsot[item]["price"], 
+                              textAlign: TextAlign.center
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
+                            child: Container(
+                              width: 260,
+                              child: Text(
+                                snapsot[item]["descr"],
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 48, 48, 54)
+                                ),
+                              ),
+                            ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+      );
+    }
+
+    return rows;
+  }
+
+  Widget menuItemList(List<Map<String, dynamic>> snapsot) {
+    return new Container(
+      child: ListView (
+          children: renderRowArray(snapsot)
+      ),
+    );
+  }
 }
 
 Widget CardsDashboard(String childDataName) {
@@ -163,7 +282,7 @@ Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
   return new GestureDetector (
     onTap: () {
       Navigator.push(context, MaterialPageRoute(
-        builder: (context) => MenuListPage()
+        builder: (context) => MenuListPage(nameBranch)
       ));
     },
     child: new Container(
@@ -184,5 +303,33 @@ Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
         },
       )
     ),
+  );
+}
+
+Widget CardsMenuItem(BuildContext context, String nameBranch) {
+  var subject = new PublishSubject<List<Map<String, dynamic>>>();
+  var getImage = new GetDateImage();
+  
+  subject = getImage.readDateMenu(nameBranch);
+
+  return new GestureDetector (
+    onTap: () {
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => MenuListPage(nameBranch)
+      ));
+    },
+    child: Container (
+      height: 1000,
+      child: StreamBuilder (
+        stream: subject.stream,
+        builder: (context, snapsot) {
+          if (snapsot.data == null) {
+            return CircularProgressIndicator();
+          }
+
+          return RenderCards().menuItemList(snapsot.data);
+        },
+      )
+    )
   );
 }

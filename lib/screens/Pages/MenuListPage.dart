@@ -25,14 +25,15 @@ import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
 import 'package:StreetCoffee/utilities/Widget/Cards.dart';
 
 class MenuListPage extends StatelessWidget with NavigationStates {
-  final Function onMenuTap;
+  String nameBranch = '';
 
-  const MenuListPage({
-    Key key, this.onMenuTap
-  }) : super(key: key);
+  MenuListPage(String nameBranch) {
+    this.nameBranch = nameBranch;
+  }
 
   @override
   Widget build(BuildContext context) {
+    GetDateImage().readDateMenu(nameBranch);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -45,16 +46,8 @@ class MenuListPage extends StatelessWidget with NavigationStates {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 15),
-                  CardsMenu(context, "hot_drinks", Color(0xFF1b1b1b)),
-                  SizedBox(height: 5),
-                  CardsMenu(context, "cold_drinks", Color(0xFF1b1b1b)),
-                  SizedBox(height: 5),
-                  CardsMenu(context, "desserts", Color(0xFF1b1b1b)),
-                  SizedBox(height: 5),
-                  CardsMenu(context, "cold_drinks", Color(0xFF1b1b1b)),
-                  SizedBox(height: 5),
-                  CardsMenu(context, "desserts", Color(0xFF1b1b1b)),
+                  SizedBox(height: 50),
+                  CardsMenuItem(context, nameBranch + '/list'),
                   SizedBox(height: 5),
                 ],
               )
