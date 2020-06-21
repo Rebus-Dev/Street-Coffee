@@ -24,23 +24,31 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:slimy_card/slimy_card.dart';
-
+import 'package:StreetCoffee/utilities/Auth/AuthUser.dart';
+import 'package:StreetCoffee/utilities/Auth/AuthDataInstancce.dart';
 import 'package:StreetCoffee/screens/NavigationBloc/NavigationBloc.dart';
 
-RegExp regExp = new RegExp(
-  r"http:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&\/=]*)?",
-  caseSensitive: false,
-  multiLine: false,
-);
-
 class GetDateImage {
-  var subject = new PublishSubject<String>();
+  var subject = new PublishSubject<Map<String, dynamic>>();
 
-  PublishSubject<String> _readDate(String childName) {
-    final DBRef = FirebaseDatabase.instance.reference().child(childName);
-    
-    DBRef.once().then((DataSnapshot dataSnapshot) {
-      subject.add(dataSnapshot.value.toString());
+  PublishSubject<Map<String, dynamic>> _readDate() {
+    final DBRef = FirebaseDatabase.instance.reference().child("users");
+
+    Future<String> userSave = SaveAndRead().read("loginSaveTmp");
+
+    String md5Phone;
+
+    userSave.then((value) => {
+      md5Phone = AuthUserLogic().generateMd5(value),
+
+      DBRef.child(md5Phone)
+        .child("code")
+        .once()
+        .then((DataSnapshot dataSnapshot) { 
+          Map<String, dynamic> code = { "code" : dataSnapshot.value };
+
+          subject.add(code);
+      })
     });
 
     return subject;
@@ -58,6 +66,9 @@ class CardBillsPage extends StatelessWidget with NavigationStates {
 
   @override
   Widget build(BuildContext context) {
+    var subject = new PublishSubject<Map<String, dynamic>>();
+    subject = GetDateImage()._readDate();
+    
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(0.0)),
@@ -78,7 +89,7 @@ class CardBillsPage extends StatelessWidget with NavigationStates {
                 },
               ),
               Text("Карта", style: TextStyle(fontSize: 24, color: Colors.black)),
-              Icon(Icons.settings, color: Colors.black),
+              Icon(Icons.favorite_border, color: Colors.black),
             ],
           ),
           SizedBox(height: 50),
@@ -92,16 +103,25 @@ class CardBillsPage extends StatelessWidget with NavigationStates {
               )
             ),
             bottomCardWidget: Container(
-              child: Text(
-                "Ваш персональний код в Street Coffee: 0171",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: 'OpenSans',
-                )
-              ),
+              child: StreamBuilder(
+                stream: subject.stream,
+                builder: (context, snapsot) { 
+                  if (snapsot.data == null) {
+                    return CircularProgressIndicator();
+                  }
+                  
+                  return Text(
+                    "Ваш персональний код в Street Coffee: ${snapsot.data["code"]}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'OpenSans',
+                    )
+                  );
+                },
+              )
             ),
           )
         ],
