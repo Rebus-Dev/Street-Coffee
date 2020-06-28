@@ -47,8 +47,6 @@ class AuthUserLogic {
       result = await _auth.signInWithCredential(credential);
     }
     catch (PlatformException) {
-      print("Invalid Enter Code!!!");
-
       return;
     }
 
@@ -62,8 +60,6 @@ class AuthUserLogic {
         builder: (context) => MenuDashboardLayout(user: user,)
       ));
     } else {
-      print("Error");
-
       return;
     }
   }
@@ -79,8 +75,6 @@ class AuthUserLogic {
       Navigator.push(context, MaterialPageRoute(
         builder: (context) => MenuDashboardLayout(user: user,)
       ));
-    } else {
-      print("Error");
     }
   }
 

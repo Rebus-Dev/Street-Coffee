@@ -43,8 +43,6 @@ class GetUserData {
   String _CheckData(String value) {
     if (value != null) {
       return userService.generateMd5(value);
-    } else {
-      print("Data is null");
     }
   }
 

@@ -34,19 +34,14 @@ Future<void> signInWithGoogle(bool _rememberMe) async {
     } catch (e) {
       switch (e.code) {
         case 'ERROR_USER_DISABLED':
-          print('Google Sign-In error: User disabled');
           break;
         case 'ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL':
-          print('Google Sign-In error: Account already exists with a different credential.');
           break;
         case 'ERROR_INVALID_CREDENTIAL':
-          print('Google Sign-In error: Invalid credential.');
           break;
         case 'ERROR_OPERATION_NOT_ALLOWED':
-          print('Google Sign-In error: Operation not allowed.');
           break;        
         default:
-          print('Google Sign-In error');
           break;
       }
 
@@ -70,6 +65,4 @@ Future<void> signInWithGoogle(bool _rememberMe) async {
 
 void signOutGoogle() async{
   await googleSignIn.signOut();
-
-  print("User Sign Out");
 }
