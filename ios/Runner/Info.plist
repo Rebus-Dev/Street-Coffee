@@ -26,9 +26,23 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.217993206758-2t2bi0i5bkit8bnt20anr46n3lm1t55i</string>
+				<string>fb694802224645794</string>
 			</array>
 		</dict>
 	</array>
+	<!-- Facebook Login configuration -->
+    <key>FacebookAppID</key>
+    <string>694802224645794</string>
+    <key>Street Coffee</key>
+    <string>Login in Street Coffee</string>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

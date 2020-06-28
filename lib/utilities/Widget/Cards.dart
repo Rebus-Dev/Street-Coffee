@@ -20,7 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import 'dart:ffi';
 import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -161,8 +160,6 @@ class RenderCards {
   }
 
   List<Widget> renderRowArray(List<Map<String, dynamic>> snapsot) {
-    print(snapsot.length);
-    
     List<Widget> rows = List();
     
     for(int item = 0; item < snapsot.length; item++) {

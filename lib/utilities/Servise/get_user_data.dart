@@ -20,9 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import 'dart:io';
-import 'package:flutter/material.dart';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:StreetCoffee/utilities/Auth/AuthUser.dart';
 import 'package:StreetCoffee/utilities/Auth/AuthDataInstancce.dart';
@@ -46,34 +43,16 @@ class GetUserData {
   String _CheckData(String value) {
     if (value != null) {
       return userService.generateMd5(value);
-    } else {
-      print("Data is null");
     }
   }
 
   void _CheckUserDB(String hashUser, String code, String phone) {
-    bool emailOrPhone = phoneOrEmail(phone);
-    
     try {
       final userDB = DBRef.child(hashUser);
 
       if (userDB != null) {
         userDB.child("code").once().then((DataSnapshot dataSnapshot) {
-          if (dataSnapshot.value == null) {
-            if (emailOrPhone) {
-              userDB.set({
-                'email' : phone,
-                'code' : code,
-              });
-            } else {
-              userDB.set({
-                'phone' : phone,
-                'code' : code,
-              });
-            }
-          } else {
-
-          }
+          dataRefDB(dataSnapshot, userDB, phone, code);
         });
       }
 
@@ -82,13 +61,31 @@ class GetUserData {
     }
   }
 
-  bool phoneOrEmail(String value) {
-    RegExp regExp = new RegExp(
-      r"@",
-      caseSensitive: false,
-      multiLine: false,
-    );
-    
+  void dataRefDB(DataSnapshot dataSnapshot, DatabaseReference userDB, String phone, String code) {
+    if (dataSnapshot.value == null) {
+      phoneOrEmailDB(userDB, phone, code);
+    }
+  }
+
+  void phoneOrEmailDB(DatabaseReference userDB, String phone, String code) {
+    String nameTag = 'facebookID';
+
+    bool emailOrPhone = phoneOrEmail(phone, RegExp(r"@"));
+    bool fbOrPhone = phoneOrEmail(phone, RegExp(r"\+"));
+
+    if (emailOrPhone) {
+      nameTag = 'email';
+    } else if (fbOrPhone) {
+      nameTag = 'phone';
+    }
+
+    userDB.set({
+      nameTag : phone,
+      'code' : code,
+    });
+  }
+
+  bool phoneOrEmail(String value, RegExp regExp) {    
     return regExp.hasMatch(value);
   }
 

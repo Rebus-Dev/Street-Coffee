@@ -20,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-import 'package:StreetCoffee/screens/MenuDashboardLayout/MenuDashboardLayout.dart';
 import 'package:flutter/material.dart';
 
 import 'package:StreetCoffee/utilities/Constants.dart';
@@ -137,7 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
             _buildLoginButton(context),
             SignInWithText('Увійти за допомогою'),
             SocialBtnRow(context, _rememberMe),
-            _buildSignupButton()
           ],
         ),
       ),
@@ -199,33 +196,6 @@ class _LoginScreenState extends State<LoginScreen> {
             fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
           )
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignupButton() {
-    return GestureDetector(
-      child: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'У вас немає облікового запису? ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            TextSpan(
-              text: 'Зареєструйтесь',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
         ),
       ),
     );

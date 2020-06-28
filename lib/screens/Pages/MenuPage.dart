@@ -54,7 +54,7 @@ class MenuPage extends StatelessWidget with NavigationStates {
                 },
               ),
               Text("Меню", style: TextStyle(fontSize: 24, color: Colors.black)),
-              Icon(Icons.settings, color: Colors.black),
+              Icon(Icons.favorite_border, color: Colors.black),
             ],
           ),
           SizedBox(height: 50),

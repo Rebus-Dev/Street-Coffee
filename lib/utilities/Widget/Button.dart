@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import 'package:StreetCoffee/utilities/Auth/FacebookSignIn.dart';
 import 'package:flutter/material.dart';
 import 'package:StreetCoffee/utilities/Auth/GoogleSignIn.dart';
 
@@ -81,7 +82,9 @@ Widget SocialBtn(Function onTap, AssetImage logo) {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           SocialBtn(
-            () => print('Login with Facebook'),
+            () => {
+              FacebookSignIn(context, saveUserSesion).login()
+            },
             AssetImage(
               "assets/images/facebook.jpg",
             ),
