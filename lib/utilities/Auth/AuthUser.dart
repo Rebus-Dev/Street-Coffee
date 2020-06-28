@@ -55,7 +55,7 @@ class AuthUserLogic {
     FirebaseUser user = result.user;
 
     if (user != null) {
-      saveDataDB(phone, '');
+      saveDataDB(phone, '', '');
       checkSaveSesion(saveUserSesion, phone);
       
       Navigator.push(context, MaterialPageRoute(
@@ -97,28 +97,54 @@ class AuthUserLogic {
     }
   }
 
-  void saveDataDB(String phone, String email) {
+  void saveDataDB(String phone, String email, String idFb) {
     if (phone.isNotEmpty) {
-      DBRef.child(generateMd5(phone)).once().then((dataSnapshot) {
-        if (dataSnapshot.value == null) {
-          DBRef.child(generateMd5(phone)).set({
-            'phone' : phone,
-          });
-        }
-      });
+      saveDBPhone(phone);
     } else if (email.isNotEmpty) {
-      DBRef.child(generateMd5(email)).once().then((dataSnapshot) {
-        if (dataSnapshot.value == null) {
-          DBRef.child(generateMd5(email)).set({
-            'email' : email,
-          });
-        }
-      });
+      saveDBEmail(email);
+    } else if (idFb.isNotEmpty) {
+      saveDBFB(idFb);
     }
+  }
+
+  void saveDBPhone(String phone) {
+    DBRef.child(generateMd5(phone)).once().then((dataSnapshot) {
+      if (dataSnapshot.value == null) {
+        DBRef.child(generateMd5(phone)).set({
+          'phone' : phone,
+        });
+      }
+    });
+  }
+
+  void saveDBEmail(String email) {
+    DBRef.child(generateMd5(email)).once().then((dataSnapshot) {
+      if (dataSnapshot.value == null) {
+        DBRef.child(generateMd5(email)).set({
+          'email' : email,
+        });
+      }
+    });
+  }
+
+  void saveDBFB(String idFb) { 
+    DBRef.child(generateMd5(idFb)).once().then((dataSnapshot) {
+      if (dataSnapshot.value == null) {
+        DBRef.child(generateMd5(idFb)).set({
+          'facebookID' : idFb,
+        });
+      }
+    });
   }
 
   String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();
+  }
+
+  void signOut() async {
+    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+    await _firebaseAuth.signOut();
   }
 
 }

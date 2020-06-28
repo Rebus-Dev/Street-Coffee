@@ -56,27 +56,32 @@ class GetUserData {
 
       if (userDB != null) {
         userDB.child("code").once().then((DataSnapshot dataSnapshot) {
-          if (dataSnapshot.value == null) {
-            if (emailOrPhone) {
-              userDB.set({
-                'email' : phone,
-                'code' : code,
-              });
-            } else {
-              userDB.set({
-                'phone' : phone,
-                'code' : code,
-              });
-            }
-          } else {
-
-          }
+          dataRefDB(dataSnapshot, userDB, emailOrPhone, phone, code);
         });
       }
 
     } catch(ex) {
       print("Not user: ${ex.code}");
     }
+  }
+
+  void dataRefDB(DataSnapshot dataSnapshot, DatabaseReference userDB, bool emailOrPhone, String phone, String code) {
+    if (dataSnapshot.value == null) {
+      phoneOrEmailDB(userDB, phone, code, emailOrPhone);
+    }
+  }
+
+  void phoneOrEmailDB(DatabaseReference userDB, String phone, String code, bool emailOrPhone) {
+    String nameTag = 'phone';
+
+    if (emailOrPhone) {
+      nameTag = 'email';
+    }
+
+    userDB.set({
+      nameTag : phone,
+      'code' : code,
+    });
   }
 
   bool phoneOrEmail(String value) {

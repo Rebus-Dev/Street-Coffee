@@ -65,7 +65,7 @@ Future<void> signInWithGoogle(bool _rememberMe) async {
     var email = user.user.email;
     
     AuthUserLogic().checkSaveSesion(_rememberMe, email);
-    AuthUserLogic().saveDataDB('', email);
+    AuthUserLogic().saveDataDB('', email, '');
 }
 
 void signOutGoogle() async{
