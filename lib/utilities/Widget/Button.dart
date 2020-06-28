@@ -83,7 +83,7 @@ Widget SocialBtn(Function onTap, AssetImage logo) {
         children: <Widget>[
           SocialBtn(
             () => {
-              // FacebookSignIn(context, saveUserSesion).login()
+              FacebookSignIn(context, saveUserSesion).login()
             },
             AssetImage(
               "assets/images/facebook.jpg",

@@ -49,14 +49,12 @@ class GetUserData {
   }
 
   void _CheckUserDB(String hashUser, String code, String phone) {
-    bool emailOrPhone = phoneOrEmail(phone);
-    
     try {
       final userDB = DBRef.child(hashUser);
 
       if (userDB != null) {
         userDB.child("code").once().then((DataSnapshot dataSnapshot) {
-          dataRefDB(dataSnapshot, userDB, emailOrPhone, phone, code);
+          dataRefDB(dataSnapshot, userDB, phone, code);
         });
       }
 
@@ -65,17 +63,22 @@ class GetUserData {
     }
   }
 
-  void dataRefDB(DataSnapshot dataSnapshot, DatabaseReference userDB, bool emailOrPhone, String phone, String code) {
+  void dataRefDB(DataSnapshot dataSnapshot, DatabaseReference userDB, String phone, String code) {
     if (dataSnapshot.value == null) {
-      phoneOrEmailDB(userDB, phone, code, emailOrPhone);
+      phoneOrEmailDB(userDB, phone, code);
     }
   }
 
-  void phoneOrEmailDB(DatabaseReference userDB, String phone, String code, bool emailOrPhone) {
-    String nameTag = 'phone';
+  void phoneOrEmailDB(DatabaseReference userDB, String phone, String code) {
+    String nameTag = 'facebookID';
+
+    bool emailOrPhone = phoneOrEmail(phone, RegExp(r"@"));
+    bool fbOrPhone = phoneOrEmail(phone, RegExp(r"\+"));
 
     if (emailOrPhone) {
       nameTag = 'email';
+    } else if (fbOrPhone) {
+      nameTag = 'phone';
     }
 
     userDB.set({
@@ -84,13 +87,7 @@ class GetUserData {
     });
   }
 
-  bool phoneOrEmail(String value) {
-    RegExp regExp = new RegExp(
-      r"@",
-      caseSensitive: false,
-      multiLine: false,
-    );
-    
+  bool phoneOrEmail(String value, RegExp regExp) {    
     return regExp.hasMatch(value);
   }
 
