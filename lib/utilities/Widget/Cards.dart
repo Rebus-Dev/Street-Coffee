@@ -161,7 +161,7 @@ class RenderCards {
 
   List<Widget> renderRowArray(List<Map<String, dynamic>> snapsot) {
     List<Widget> rows = List();
-    
+
     for(int item = 0; item < snapsot.length; item++) {
       rows.add(
         Card(
@@ -192,7 +192,7 @@ class RenderCards {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          snapsot[item]["name"]                
+                          snapsot[item]["name"]
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
@@ -201,7 +201,7 @@ class RenderCards {
                               border: Border.all(color: Colors.teal),
                             ),
                             child: Text(
-                              snapsot[item]["price"], 
+                              snapsot[item]["price"],
                               textAlign: TextAlign.center
                             ),
                           ),
@@ -234,8 +234,9 @@ class RenderCards {
   }
 
   Widget menuItemList(List<Map<String, dynamic>> snapsot) {
-    return new Container(
+    return Container(
       child: ListView (
+          scrollDirection: Axis.vertical,
           children: renderRowArray(snapsot)
       ),
     );
@@ -254,7 +255,7 @@ Widget CardsDashboard(String childDataName) {
       stream: subject.stream,
       builder: (context, snapsot) {
         if (snapsot.data == null) {
-          return CircularProgressIndicator();
+          return new Container();
         }
 
         var urls = snapsot.data.split(',');
@@ -294,7 +295,7 @@ Widget CardsMenu(BuildContext context, String nameBranch, Color colorCard) {
         stream: subject.stream,
         builder: (context, snapsot) {
           if (snapsot.data == null) {
-            return CircularProgressIndicator();
+            return new Container();
           }
 
           return RenderCards().renderRow(snapsot.data);
@@ -317,7 +318,7 @@ Widget CardsMenuItem(BuildContext context, String nameBranch) {
         stream: subject.stream,
         builder: (context, snapsot) {
           if (snapsot.data == null) {
-            return CircularProgressIndicator();
+            return new Container();
           }
 
           return RenderCards().menuItemList(snapsot.data);

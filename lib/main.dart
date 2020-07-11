@@ -37,7 +37,7 @@ class StreetCoffee extends StatelessWidget {
 
     return MaterialApp(
       title: "Street Coffee",
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       home: new RootPage(),
     );
   }
