@@ -67,6 +67,7 @@ class CardBillsPage extends StatelessWidget with NavigationStates {
   @override
   Widget build(BuildContext context) {
     var subject = new PublishSubject<Map<String, dynamic>>();
+    var code = "";
     subject = GetDateImage()._readDate();
     
     return Container(
@@ -109,9 +110,15 @@ class CardBillsPage extends StatelessWidget with NavigationStates {
                   if (snapsot.data == null) {
                     return CircularProgressIndicator();
                   }
-                  
+
+                  if (snapsot.data["code"] == null)  {
+                    code = "---";
+                  } else {
+                    code = snapsot.data["code"];
+                  }
+
                   return Text(
-                    "Ваш персональний код в Street Coffee: ${snapsot.data["code"]}",
+                    "Ваш персональний код в Street Coffee: $code",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
