@@ -311,11 +311,6 @@ Widget CardsMenuItem(BuildContext context, String nameBranch) {
   subject = getImage.readDateMenu(nameBranch);
 
   return new GestureDetector (
-    onTap: () {
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context) => MenuListPage(nameBranch)
-      ));
-    },
     child: Container (
       height: 1000,
       child: StreamBuilder (

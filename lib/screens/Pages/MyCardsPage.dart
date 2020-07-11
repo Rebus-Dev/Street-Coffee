@@ -119,6 +119,7 @@ class MyCardsPage extends StatelessWidget with NavigationStates {
                   }
                   
                   GetUserData().GetData(code);
+                  Navigator.of(context).pop();
                 },
             )
           ],

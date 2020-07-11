@@ -62,12 +62,12 @@ class MenuPage extends StatelessWidget with NavigationStates {
           SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                CardsMenu(context, "hot_drinks", Color(0xFF1b1b1b)),
-                SizedBox(height: 5),
+                // CardsMenu(context, "hot_drinks", Color(0xFF1b1b1b)),
+                // SizedBox(height: 5),
                 CardsMenu(context, "cold_drinks", Color(0xFF1b1b1b)),
                 SizedBox(height: 5),
-                CardsMenu(context, "desserts", Color(0xFF1b1b1b)),
-                SizedBox(height: 10),
+                // CardsMenu(context, "desserts", Color(0xFF1b1b1b)),
+                // SizedBox(height: 10),
               ],
             )
           ),

@@ -39,7 +39,7 @@ class MenuListPage extends StatelessWidget with NavigationStates {
         children: <Widget>[
           Container(
             height: double.infinity,
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: Colors.white70
             ),
