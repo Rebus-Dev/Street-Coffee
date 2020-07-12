@@ -46,6 +46,7 @@ class MenuListPage extends StatelessWidget with NavigationStates {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
+                  SizedBox(height: 25),
                   CardsMenuItem(context, nameBranch + '/list'),
                   SizedBox(height: 5),
                 ],
